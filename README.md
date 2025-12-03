@@ -11,7 +11,7 @@ By default, ensure-update will pull if eight hours have passed since the last ti
 
 ## What the hell do I do with this?
 
-Whatever you like. For example:
+Whatever you like. For example, see this handy fish function:
 
 ```fish
 function dl --description "download videos via yt-dlp"
