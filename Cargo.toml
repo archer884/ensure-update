@@ -4,6 +4,6 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-abseil = "0.3.0"
+abseil = { version = "0.4.0", git = "https://github.com/archer884/abseil" }
 clap = { version = "4.5.53", features = ["derive", "wrap_help"] }
 jiff = { version = "0.2.16", features = ["serde"] }

@@ -7,7 +7,7 @@ use std::{
 
 use abseil::Provider;
 use clap::Parser;
-use jiff::Timestamp;
+use jiff::{SignedDuration, Timestamp};
 
 #[derive(Debug, Parser)]
 struct Opts {
@@ -16,7 +16,7 @@ struct Opts {
 
     // how long ago can the last update be before we trigger another
     #[arg(default_value_t = 8)]
-    max_age: usize,
+    max_age: i32,
 
     // ignore last update time
     #[arg(short, long)]
@@ -87,13 +87,15 @@ fn run(opts: Opts) -> io::Result<()> {
     Ok(())
 }
 
-fn is_recent(table: &HashMap<String, Timestamp>, repository_name: &str, max_age: usize) -> bool {
+fn is_recent(table: &HashMap<String, Timestamp>, repository_name: &str, max_age: i32) -> bool {
     let Some(&timestamp) = table.get(repository_name) else {
         return false;
     };
 
-    let elapsed = Timestamp::now() - timestamp;
-    max_age as i32 > elapsed.get_hours()
+    // No idea why Spans can't be compared, but SignedDurations can, so I guess
+    // that's what we're gonna use. /shrug
+    let elapsed = timestamp.duration_until(Timestamp::now()).abs();
+    SignedDuration::from_hours(max_age as i64) > elapsed
 }
 
 fn build_update_command() -> Command {

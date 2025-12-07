@@ -4,9 +4,8 @@ version = 4
 
 [[package]]
 name = "abseil"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c1ed4f5d1db4c7d6eacdfdfcb3f13acab486b99f3699c704beef83ffd5abde72"
+version = "0.4.0"
+source = "git+https://github.com/archer884/abseil#d8f3a0350c6e51d2024bb3da5fca4eb1c0234baf"
 dependencies = [
  "chrono",
  "directories",
