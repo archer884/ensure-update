@@ -15,7 +15,7 @@ struct Opts {
     repository: String,
 
     // how long ago can the last update be before we trigger another
-    #[arg(default_value_t = 8)]
+    #[arg(default_value_t = 4)]
     max_age: i32,
 
     // ignore last update time
